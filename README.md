@@ -1,54 +1,14 @@
 # Hello world!
-
-Nice to meet you. I am doing swell.
-
-I wonder some days whether the void will swallow me
-
-If everything breaks...
-
-Nothing is sacred.
-
-Pondering is the nature of our existence I'm afraid.
-
-That's just the way it is!
-
-Something will never change.
-
-I wonder some days whether the void will swallow me
-
-If everything breaks...
-
-Nothing is sacred.
-
-Pondering is the nature of our existence I'm afraid.
-
-That's just the way it is!
-
-Something will never change.
+Minimalist writing workflow with laptop-localhost and Kindle Paperwhite
+```js
+Kindle > `Web Browser` > `http://${yourIPaddress}:${PORT}` // Dead simple local-hosting
+```
+```js
+npm install express markdown-it // Only 2 dependencies
+```
 
 
-I guess it depends
 
-Whether you think you're on top, sometimes it doesn't matter.
-
-What seems to really matter is how much love you can radiate.
-
-Love can win.
-
-It doesn't matter how much they shit on you.
-
-How much they try to slander it.
-
-What if
-
-No matter what they say.
-
-Things always will be woorth living.
-
-I don't care what your guru says.
-
-I am trying to speak to your heart.
-
-To your soul.
-
-
+## Powers Available 
+- Glare-free sunshine writing sessions
+- 
