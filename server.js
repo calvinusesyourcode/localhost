@@ -9,7 +9,7 @@ const PORT = 3000
 const REFRESH = 5
 const POLLING = 1
 
-let markdownPath = path.join(__dirname, 'README.md')
+let markdownPath = path.join(__dirname, '20240223-2.md')
 let lastModified = new Date(Date.now()-1_000)
 let htmlContent = ''
 
@@ -37,12 +37,12 @@ const checkForUpdates = () => {
                 <body>
                     ${md.render(data)}
                     <script>
-                        window.onload = function() {
-                            setInterval(function() {
-                                window.scrollTo(0,document.body.scrollHeight);
-                                console.log(document.body.scrollHeight)
-                            }, ${REFRESH*1_000});
-                        }   
+                        // window.onload = function() {
+                        //     setInterval(function() {
+                        //         window.scrollTo(0,document.body.scrollHeight);
+                        //         console.log(document.body.scrollHeight)
+                        //     }, ${REFRESH*1_000});
+                        // }   
                     </script>
                 </body>
                 </html>
