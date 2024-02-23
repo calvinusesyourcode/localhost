@@ -38,3 +38,17 @@ Love can win.
 It doesn't matter how much they shit on you.
 
 How much they try to slander it.
+
+What if
+
+No matter what they say.
+
+Things always will be woorth living.
+
+I don't care what your guru says.
+
+I am trying to speak to your heart.
+
+To your soul.
+
+

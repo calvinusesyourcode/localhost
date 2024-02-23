@@ -1,24 +1,25 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const markdownIt = require('markdown-it');
-const md = new markdownIt();
-const app = express();
+const express = require('express')
+const fs = require('fs')
+const path = require('path')
+const markdownIt = require('markdown-it')
+const md = new markdownIt()
+const app = express()
 
-const PORT = 3000;
+const PORT = 3000
 const REFRESH = 5
 const POLLING = 1
 
-let markdownPath = path.join(__dirname, 'README.md');
-let lastModified = new Date(Date.now()-1_000);
-let htmlContent = '';
+let markdownPath = path.join(__dirname, 'README.md')
+let lastModified = new Date(Date.now()-1_000)
+let htmlContent = ''
 
 const checkForUpdates = () => {
     fs.stat(markdownPath, (err, stats) => {
         if (err) {console.error("Error reading file stats:", err); return}
         if (stats.mtime <= lastModified) {console.log("No updates found"); return}
+        console.log("File updated. Generating new HTML content...")
 
-        lastModified = stats.mtime;
+        lastModified = stats.mtime
         fs.readFile(markdownPath, 'utf8', (err, data) => {
             if (err) {console.error("Error reading markdown file:", err); return}
 
@@ -45,17 +46,17 @@ const checkForUpdates = () => {
                     </script>
                 </body>
                 </html>
-            `;
-        });
-  });
-};
+            `
+        })
+  })
+}
 
-setInterval(checkForUpdates, POLLING*1_000);
+setInterval(checkForUpdates, POLLING*1_000)
 
 app.get('/', (req, res) => {
-  res.send(htmlContent);
+  res.send(htmlContent)
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+  console.log(`Server running at http://localhost:${PORT}`)
+})
