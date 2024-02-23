@@ -27,15 +27,34 @@ const checkForUpdates = () => {
           return;
         }
 
-        // Convert markdown to HTML
-        htmlContent = md.render(data);
+        // Convert markdown to HTML and include a meta refresh tag
+        const refreshRate = 5; // Refresh every 5 seconds
+        htmlContent = `
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="refresh" content="${refreshRate}">
+            <title>Markdown Page</title>
+            <style>
+                body {
+                    font-size: 32px;
+                }
+            </style>
+          </head>
+          <body>
+          
+            ${md.render(data)}
+          </body>
+          </html>
+        `;
       });
     }
   });
 };
 
 // Set an interval to check for file updates every X milliseconds
-const pollingInterval = 5000; // Example: 5000 milliseconds (5 seconds)
+const pollingInterval = 1000; // Example: 5000 milliseconds (5 seconds)
 setInterval(checkForUpdates, pollingInterval);
 
 // Serve the latest HTML content
