@@ -3,61 +3,55 @@ const fs = require('fs');
 const path = require('path');
 const markdownIt = require('markdown-it');
 const md = new markdownIt();
-
 const app = express();
+
 const PORT = 3000;
-const markdownFilePath = path.join(__dirname, 'yourMarkdownFile.md');
-let lastModified = new Date(0); // Initialize with a past date
-let htmlContent = ''; // To store the converted HTML content
+const REFRESH = 5
+const POLLING = 1
 
-// Function to check for file updates
+let markdownPath = path.join(__dirname, 'README.md');
+let lastModified = new Date(Date.now()-1_000);
+let htmlContent = '';
+
 const checkForUpdates = () => {
-  fs.stat(markdownFilePath, (err, stats) => {
-    if (err) {
-      console.error("Error reading file stats:", err);
-      return;
-    }
+    fs.stat(markdownPath, (err, stats) => {
+        if (err) {console.error("Error reading file stats:", err); return}
+        if (stats.mtime <= lastModified) {console.log("No updates found"); return}
 
-    if (stats.mtime > lastModified) {
-      // File has been updated
-      lastModified = stats.mtime;
-      fs.readFile(markdownFilePath, 'utf8', (err, data) => {
-        if (err) {
-          console.error("Error reading markdown file:", err);
-          return;
-        }
+        lastModified = stats.mtime;
+        fs.readFile(markdownPath, 'utf8', (err, data) => {
+            if (err) {console.error("Error reading markdown file:", err); return}
 
-        // Convert markdown to HTML and include a meta refresh tag
-        const refreshRate = 5; // Refresh every 5 seconds
-        htmlContent = `
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="refresh" content="${refreshRate}">
-            <title>Markdown Page</title>
-            <style>
-                body {
-                    font-size: 32px;
-                }
-            </style>
-          </head>
-          <body>
-          
-            ${md.render(data)}
-          </body>
-          </html>
-        `;
-      });
-    }
+            htmlContent = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="refresh" content="${REFRESH}">
+                    <title>Markdown Page</title>
+                    <style>
+                        body { font-size: 32px; }
+                    </style>
+                </head>
+                <body>
+                    ${md.render(data)}
+                    <script>
+                        window.onload = function() {
+                            setInterval(function() {
+                                window.scrollTo(0,document.body.scrollHeight);
+                                console.log(document.body.scrollHeight)
+                            }, ${REFRESH*1_000});
+                        }   
+                    </script>
+                </body>
+                </html>
+            `;
+        });
   });
 };
 
-// Set an interval to check for file updates every X milliseconds
-const pollingInterval = 1000; // Example: 5000 milliseconds (5 seconds)
-setInterval(checkForUpdates, pollingInterval);
+setInterval(checkForUpdates, POLLING*1_000);
 
-// Serve the latest HTML content
 app.get('/', (req, res) => {
   res.send(htmlContent);
 });
