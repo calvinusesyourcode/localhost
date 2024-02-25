@@ -1,13 +1,1 @@
-Leverage will continue to go up like a rocket.
-
-The world of infinite leverage is basically here.
-
-It's sort of scary...
-
-Or is it?
-
-See the way I like to think of it is...
-
-Imagine you have a carton of eggs...
-
-And you're trying to break into a store...
+Write here

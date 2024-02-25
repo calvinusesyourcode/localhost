@@ -6,7 +6,7 @@ const md = new markdownIt()
 const app = express()
 
 const PORT = 3000
-const REFRESH = 5
+const REFRESH = 1
 const POLLING = 1
 
 let markdownPath = path.join(__dirname, 'TODAY.md')
